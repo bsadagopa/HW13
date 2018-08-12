@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mission to Mars</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body style = "background: black;" >
+  
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+            <div class="col-sm-12">
+                    <div style="background:maroon;" class="jumbotron text-center">
+                            <h1 class="display-3 mb-5"><font color="sky-blue"><strong>Mission to Mars</strong></font></h1>
+                            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p> 
+                    </div>
+            </div>
+    </div>
+  
+    <!-- Mars News -->
+    <div class="row justify-content-center" id="mars-news">
+      <div style="background:black;" class="col-md-12">
+        <div class="media">
+          <div class="media-body">
+            <h2><font color = "red"> Latest Mars News</font></h2>
+            <h4 class="media-heading"><font color = "sky-blue"> {{mars.Top_Mars_Title}}</font></h4>
+            <p><font color = "sky-blue"> {{mars.Top_Mars_Title_News}}</font></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Mars Featured Image -->
+  <!-- <div style = "background: black;" class="row" id="mars-featured-image"> -->
+  <div style = "background: black;" class="row" id="mars-featured-image">  
+    <div class="col-md-8">
+      <h2><font color = "red"> Featured Mars Image</font></h2>
+
+        <!-- if images is False/None/non-existent, then default to error message -->
+        <img src="{{mars.Top_Mars_Image}}" class="img-fluid"
+        alt="Responsive image">
+    </div>
+
+    <div class="col-md-4">
+        <!-- Mars Weather -->
+        <div class="row" id="mars-weather">
+            <div class="col-md-12">
+  
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4><font color = "red"> Current Weather on Mars</font></h4>
+                        <p><font color = "sky-blue"> {{mars.Mars_Weather}}</font></p>
+                    </div>
+                </div>
+  
+  
+            </div>
+          </div>
+  
+          <!-- Mars Facts -->
+          <div class="row" id="mars-facts">
+            <div class="col-md-12">
+              <h4><font color = "red"> Mars Facts</font></h4>
+              <font color = "sky-blue"> {{mars.Mars_Facts | safe}}</font>
+            </div>
+          </div>
+      
+    </div>
+  
+  
+  </div>
+
+    <!-- Mars Hemispheres -->
+  <div style = "background: black; margin-top:80px;" id="mars-hemispheres" >
+    <div class="row justify-content-center">
+      <h2><font color = "red"> Mars Hemispheres</font></h2>
+    </div>
+
+    <div class="row">
+        {% for hemisphere in mars.Mars_Hemispheres %}
+          <div class="col-md-6">
+      
+              <div class="row">
+                <div class="col mx-auto">
+                  
+                  <img src="{{hemisphere.Image_URL | default('static/images/error.png', true)}}" alt="..." class="img-fluid">
+
+                  <div class="caption">
+                      <h3><font color = "sky-blue"> {{hemisphere.Title}}</font></h3>
+                  </div>
+                  
+                </div>
+              
+              </div>
+          </div>
+        {% endfor %}
+    </div>
+  </div> 
+
+
+</div>
+
+</body>
+</html>
